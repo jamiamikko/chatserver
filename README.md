@@ -1,1 +1,3 @@
 # chatserver
+
+Kurssiin liittyviä tehtäviä.
