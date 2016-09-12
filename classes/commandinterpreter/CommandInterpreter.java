@@ -31,10 +31,14 @@ public class CommandInterpreter {
             
             if (command.equals(":user")) {
                   
-                username = command;
                 
                 if (username.isEmpty()) {
-                    System.out.println("Username not set. Give :user command.");
+                    System.out.println("Username not set.");
+                    
+                    System.out.println("Type your username: ");
+                
+                    username = reader.nextLine();
+                    System.out.println("Username is " + username);
                 } else {
                     System.out.println("Username is " + username);
                 }
