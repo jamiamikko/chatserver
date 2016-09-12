@@ -49,7 +49,7 @@ public class CommandInterpreter {
                 System.out.println("Goodbye.");
                 System.exit(0);
             } else {
-                System.out.println(command);
+                System.out.println(username + ": " + command);
             }
             
         }
