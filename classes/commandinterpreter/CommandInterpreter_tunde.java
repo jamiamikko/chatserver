@@ -15,20 +15,23 @@ public class CommandInterpreter {
         String command;
         String username = "user";
 
-        System.out.println("Hello! ");
+        System.out.print("Hello!\n");
+        System.out.print("Commands:\n:user = change username\n:help = list commands\n:quit = quit application\n>");
 
         while (true) {
             command = reader.nextLine();
 
             if (command.equals(":user")) {
-                System.out.println("Type your username: ");
+                System.out.print("Type your new username: \n>");
                 username = reader.nextLine();
-                System.out.println("Your username has been set to " + username + ".");
-            } else if (command.equals(":quit")) {
+                System.out.print("Your username has been set to " + username + ".\n>");
+            }else if (command.equals(":help")){
+                System.out.print("Commands:\n:user = Change username\n:help = List commands\n:quit = Quit application\n>");
+            }else if (command.equals(":quit")) {
                 System.out.println("Goodbye!");
                 break;
             } else {
-                System.out.println(username + ":" + command);
+                System.out.print(username + ":" + command + "\n>");
             }
         }
     }
