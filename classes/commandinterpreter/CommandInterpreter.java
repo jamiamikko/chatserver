@@ -23,6 +23,8 @@ public class CommandInterpreter {
     
     public void run() {
         String username = "";
+        System.out.println("Hello!");
+        
         
         while(true) {
             
