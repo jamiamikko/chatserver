@@ -12,13 +12,13 @@ import commandinterpreter.CommandInterpreter;
  * @author jamiamikko
  */
 public class Main {
-    
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
+
+    public static void main(String args[]) throws IOException {
+        ChatServer cs = new ChatServer();
         CommandInterpreter ci = new CommandInterpreter(System.in, System.out);
-        ci.run();
+        //ci.run();
+        cs.serve();
         
     }
+
 }
