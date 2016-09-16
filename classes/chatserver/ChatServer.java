@@ -33,9 +33,9 @@ public class ChatServer {
                 System.out.println("Connection Established!!");
                 CommandInterpreter i = new CommandInterpreter(s.getInputStream(), new PrintStream(s.getOutputStream()));
                 
+                Thread t = new Thread(i);
                 
-                
-                i.run();
+                t.start();
 
             }
 
