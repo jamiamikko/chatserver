@@ -23,6 +23,9 @@ public class CommandInterpreter {
     
     public void run() {
         String username = "";
+        
+        
+        
         System.out.println("Hello!");
         
         
@@ -31,25 +34,33 @@ public class CommandInterpreter {
             System.out.println("Type a command: ");
             String command = reader.nextLine();
             
-            if (command.equals(":user")) {
-                  
-                
-                if (username.isEmpty()) {
-                    System.out.println("Username not set.");
-                    
-                    System.out.println("Type your username: ");
-                
-                    username = reader.nextLine();
-                    System.out.println("Username is " + username);
-                } else {
-                    System.out.println("Username is " + username);
-                }
-                
-            } else if (command.equals(":quit")) {
-                System.out.println("Goodbye.");
-                System.exit(0);
-            } else {
-                System.out.println(username + ": " + command);
+            switch (command) {
+                case ":user":
+                    if (username.isEmpty()) {
+                        System.out.println("Username not set.");
+                        
+                        System.out.println("Type your username: ");
+                        
+                        username = reader.nextLine();
+                        System.out.println("Username is " + username);
+                    } else {
+                        System.out.println("Username is " + username);
+                    }   break;
+                case ":quit":
+                    System.out.println("Goodbye.");
+                    System.exit(0);
+                default:
+                    if (username.isEmpty()) {
+                        System.out.println("Username not set.");
+                        
+                        System.out.println("Type your username: ");
+                        
+                        username = reader.nextLine();
+                        System.out.println("Username is " + username);
+                    } else {
+                        System.out.println(username + ": " + command);
+                        
+                    }
             }
             
         }
