@@ -6,9 +6,9 @@
 
 /**
  *
- *
- * @author RYU
+ * @author jamiamikko
  */
+import commandinterpreter.CommandInterpreter;
 import java.net.*;
 import java.io.*;
 
@@ -22,20 +22,19 @@ public class ChatServer {
         try {
             ServerSocket server = new ServerSocket(0, 3);
             int portaddress = server.getLocalPort();
-            System.out.println(portaddress);
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            BufferedReader in;
-            PrintWriter out;
+            System.out.println(portaddress);       
             Socket s;
-            String message;
-
+     
             while (true) {
                 System.out.println("Waiting ....");
 
                 s = server.accept();
-
+                
                 System.out.println("Connection Established!!");
                 CommandInterpreter i = new CommandInterpreter(s.getInputStream(), new PrintStream(s.getOutputStream()));
+                
+                
+                
                 i.run();
 
             }

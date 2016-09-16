@@ -1,5 +1,6 @@
 
 import commandinterpreter.CommandInterpreter;
+import java.io.IOException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +13,8 @@ import commandinterpreter.CommandInterpreter;
  * @author jamiamikko
  */
 public class Main {
-
+    
+    
     public static void main(String args[]) throws IOException {
         ChatServer cs = new ChatServer();
         CommandInterpreter ci = new CommandInterpreter(System.in, System.out);
@@ -20,5 +22,4 @@ public class Main {
         cs.serve();
         
     }
-
 }

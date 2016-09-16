@@ -17,17 +17,14 @@ public class CommandInterpreter {
 
     Scanner reader = new Scanner(System.in);
 
-    public CommandInterpreter(InputStream in, PrintStream out) {
+    public CommandInterpreter(InputStream inputStream, PrintStream outputStream) {
         
     }
     
     public void run() {
         String username = "";
-        
-        
-        
+
         System.out.println("Hello!");
-        
         
         while(true) {
             
