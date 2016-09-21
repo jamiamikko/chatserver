@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,9 +15,15 @@ public class ChatHistory {
     
     private ChatMessage chatMessage;
     private String message;
+    private String username;
+    
+    private ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
+    
+    public String history;
+    
     
     private ChatHistory() {
-        this.chatMessage = new ChatMessage(message);
+        this.chatMessage = new ChatMessage(username, message);
     }
     
     public static ChatHistory getInstance() {
@@ -24,14 +33,22 @@ public class ChatHistory {
     private static class ChatHistoryHolder {
 
         private static final ChatHistory INSTANCE = new ChatHistory();
+        
+        
     }
     
     public void insert(ChatMessage chatMessage) {
-    
+        messageHistory.add(chatMessage);
+        
+        System.out.println("HEHEHE");
     }
     
     @Override public String toString() {
-    
-        return "";
+       
+        for(ChatMessage element : messageHistory) {
+            history += element;
+        }
+        
+        return history;
     }
 }

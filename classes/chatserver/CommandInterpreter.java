@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package commandinterpreter;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -47,6 +46,9 @@ public class CommandInterpreter implements Runnable {
                 case ":quit":
                     System.out.println("Goodbye.");
                     System.exit(0);
+
+                case ":history":
+                    System.out.println(ChatHistory.getInstance());
                 default:
                     if (username.isEmpty()) {
                         System.out.println("Username not set.");
@@ -61,6 +63,9 @@ public class CommandInterpreter implements Runnable {
                     }
             }
 
+            ChatMessage chatmessage = new ChatMessage(username, command);
+
+            chatmessage.toString();
         }
     }
 
