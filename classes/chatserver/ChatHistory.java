@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author jamiamikko
  */
-public class ChatHistory {
+public class ChatHistory implements Observer {
     
     private ChatMessage chatMessage;
     private String message;
-    private String username;
+   
     
     private ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
     
@@ -23,7 +23,7 @@ public class ChatHistory {
     
     
     private ChatHistory() {
-        this.chatMessage = new ChatMessage(username, message);
+        this.chatMessage = new ChatMessage(message);
     }
     
     public static ChatHistory getInstance() {
@@ -51,4 +51,5 @@ public class ChatHistory {
         
         return history;
     }
+    
 }

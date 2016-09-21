@@ -63,9 +63,7 @@ public class CommandInterpreter implements Runnable {
                     }
             }
 
-            ChatMessage chatmessage = new ChatMessage(username, command);
-
-            chatmessage.toString();
+            
         }
     }
 
