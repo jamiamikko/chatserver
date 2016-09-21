@@ -15,6 +15,10 @@ public class ChatMessage {
     ChatMessage(String message) {
         this.message = message;
     }
+
+    ChatMessage() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public String toString() {
     

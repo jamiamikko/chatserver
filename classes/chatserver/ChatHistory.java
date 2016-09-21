@@ -10,7 +10,10 @@
  */
 public class ChatHistory {
     
+    private ChatMessage message;
+    
     private ChatHistory() {
+        this.message = new ChatMessage();
     }
     
     public static ChatHistory getInstance() {
