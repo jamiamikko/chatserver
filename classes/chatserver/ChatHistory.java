@@ -26,7 +26,7 @@ public class ChatHistory {
         private static final ChatHistory INSTANCE = new ChatHistory();
     }
     
-    public void insert(ChatMessage message) {
+    public void insert(ChatMessage chatMessage) {
     
     }
     
