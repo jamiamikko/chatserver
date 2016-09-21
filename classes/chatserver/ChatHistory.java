@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author jamiamikko
  */
-public class ChatHistory implements Observer {
+public class ChatHistory {
     
     private ChatMessage chatMessage;
     private String message;
