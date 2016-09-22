@@ -15,43 +15,47 @@ public class CommandInterpreter implements Runnable {
         String username = "";
 
         System.out.println("Hello!");
+        System.out.print("Commands:\n:user = Change username\n:history = Show sent messages\n:help = List commands\n:quit = Quit application\n");
+        System.out.print("Type a command: \n>");
 
         ChatHistory history = ChatHistory.getInstance();
 
         while (true) {
 
-            System.out.println("Type a command: ");
             String command = reader.nextLine();
 
             switch (command) {
                 case ":user":
                     if (username.isEmpty()) {
-                        System.out.println("Username not set.");
+                        System.out.print("Username not set.");
 
-                        System.out.println("Type your username: ");
+                        System.out.println("Type your username: \n>");
 
                         username = reader.nextLine();
-                        System.out.println("Username is " + username);
+                        System.out.print("Username is " + username + "\n>");
                     } else {
-                        System.out.println("Username is " + username);
+                        System.out.print("Username is " + username + "\n>");
                     }
                     break;
                 case ":quit":
                     System.out.println("Goodbye.");
                     System.exit(0);
-
                 case ":history":
-                    System.out.print(history.toString());
+                    System.out.print(history.toString() + ">");
+                    break;
+                case ":help":
+                    System.out.print("Commands:\n:user = Change username\n:help = List commands\n:quit = Quit application\n>");
+                    break;
                 default:
                     if (username.isEmpty()) {
                         System.out.println("Username not set.");
 
-                        System.out.println("Type your username: ");
+                        System.out.print("Type your username: \n>");
 
                         username = reader.nextLine();
-                        System.out.println("Username is " + username);
+                        System.out.print("Username is " + username + "\n>");
                     } else {
-                        System.out.println(username + ": " + command);
+                        System.out.print(username + ": " + command + "\n>");
                         ChatMessage chatmessage = new ChatMessage(username, command);
 
                         history.insert(chatmessage);
