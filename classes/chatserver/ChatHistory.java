@@ -1,5 +1,7 @@
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ChatHistory {
 
@@ -8,7 +10,7 @@ public class ChatHistory {
     static ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
 
     private ChatHistory() {
-        
+
     }
 
     public static ChatHistory getInstance() {
@@ -26,7 +28,9 @@ public class ChatHistory {
         String list = new String();
 
         for (ChatMessage element : messageHistory) {
-            list += (element.username + ": " + element.message + "\n");
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+            list += (timeStamp + " " + element.username + ": " + element.message + "\n");
         }
 
         return list;
