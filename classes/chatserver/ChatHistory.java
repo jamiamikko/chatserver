@@ -6,50 +6,38 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
- * @author jamiamikko
+ * @author RYU
  */
 public class ChatHistory {
-    
-    private ChatMessage chatMessage;
-    private String message;
-   
-    
-    private ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
-    
-    public String history;
-    
-    
-    private ChatHistory() {
-        this.chatMessage = new ChatMessage(message);
-    }
-    
-    public static ChatHistory getInstance() {
-        return ChatHistoryHolder.INSTANCE;
-    }
-    
-    private static class ChatHistoryHolder {
 
-        private static final ChatHistory INSTANCE = new ChatHistory();
-        
+    private static ChatHistory instance = new ChatHistory();
+
+    static ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
+
+    private ChatHistory() {
         
     }
-    
+
+    public static ChatHistory getInstance() {
+        return instance;
+    }
+
     public void insert(ChatMessage chatMessage) {
         messageHistory.add(chatMessage);
-        
-        System.out.println("HEHEHE");
+
+        //System.out.println("HEHEHE" + chatMessage.message);
     }
-    
-    @Override public String toString() {
-       
-        for(ChatMessage element : messageHistory) {
-            history += element;
+
+    @Override
+    public String toString() {
+        String list = new String();
+
+        for (ChatMessage element : messageHistory) {
+            list += (element.username + ": " + element.message + "\n");
         }
-        
-        return history;
+
+        return list;
     }
-    
 }
