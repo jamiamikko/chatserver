@@ -2,15 +2,19 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class ChatHistory {
-
+public class ChatHistory implements ObservableChat{
+    private ArrayList<ChatObserver> observers;
+   
     private static ChatHistory instance = new ChatHistory();
+    static ArrayList<ChatMessage> messageHistory;
 
-    static ArrayList<ChatMessage> messageHistory = new ArrayList<ChatMessage>();
-
-    private ChatHistory() {
-
+    public ChatHistory() {
+        this.observers=new ArrayList<>();
+        this.messageHistory = new ArrayList<>();
     }
 
     public static ChatHistory getInstance() {
@@ -34,5 +38,21 @@ public class ChatHistory {
         }
 
         return list;
+    }
+
+    @Override
+    public void register(ChatObserver observer) {
+        observers.add(observer);
+        
+    }
+
+    @Override
+    public void deregister(ChatObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(ChatMessage message) {
+        System.out.println("History change: "+message);
     }
 }

@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String args[]) throws IOException {
         ChatServer cs = new ChatServer();
-        CommandInterpreter ci = new CommandInterpreter(System.in, System.out);
+       
         //ci.run();
         cs.serve();
 

@@ -8,6 +8,7 @@
  *
  * @author jamiamikko
  */
+
 import java.net.*;
 import java.io.*;
 
@@ -21,21 +22,21 @@ public class ChatServer {
         try {
             ServerSocket server = new ServerSocket(0, 3);
             int portaddress = server.getLocalPort();
-            System.out.println(portaddress);
+            System.out.println(portaddress);       
             Socket s;
-
+     
             while (true) {
                 System.out.println("Waiting ....");
 
                 s = server.accept();
-
+                
                 System.out.println("Connection Established!!");
                 CommandInterpreter i = new CommandInterpreter(s.getInputStream(), new PrintStream(s.getOutputStream()));
-
-                Thread t = new Thread(i);
-
+                
+                Thread t = new Thread((Runnable) i);
+                
                 t.start();
-
+                
             }
 
         } catch (IOException e) {

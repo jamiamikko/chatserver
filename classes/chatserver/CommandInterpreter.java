@@ -1,4 +1,3 @@
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -13,12 +12,16 @@ public class CommandInterpreter implements Runnable {
 
     public void run() {
         String username = "";
+        ChatHistory updateHistory = ChatHistory.getInstance();
+        
+        
+        ChatHistory chatHistory = new ChatHistory();
+        User userName = new User("user");
+        chatHistory.register(userName);
 
         System.out.println("Hello!");
         System.out.print("Commands:\n:user = Change username\n:history = Show sent messages\n:help = List commands\n:quit = Quit application\n");
         System.out.print("Type a command: \n>");
-
-        ChatHistory history = ChatHistory.getInstance();
 
         while (true) {
 
@@ -41,7 +44,7 @@ public class CommandInterpreter implements Runnable {
                     System.out.println("Goodbye.");
                     System.exit(0);
                 case ":history":
-                    System.out.print(history.toString() + ">");
+                    System.out.print(updateHistory.toString() + ">");
                     break;
                 case ":help":
                     System.out.print("Commands:\n:user = Change username\n:help = List commands\n:quit = Quit application\n>");
@@ -58,7 +61,7 @@ public class CommandInterpreter implements Runnable {
                         System.out.print(username + ": " + command + "\n>");
                         ChatMessage chatmessage = new ChatMessage(username, command);
 
-                        history.insert(chatmessage);
+                        updateHistory.insert(chatmessage);
 
                     }
             }
