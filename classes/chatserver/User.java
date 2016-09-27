@@ -1,4 +1,3 @@
-
 public class User implements ChatObserver {
 
     /*Instace variables for chatObserver*/
@@ -27,11 +26,9 @@ public class User implements ChatObserver {
         return name + " status: " + status;
     }
 
-    /*update() to print out new messages*/
+    /*update() method for updating history changes*/
     @Override
     public void update(ChatMessage message) {
-
-        System.out.print(name + ": " + message + "\n>");
+        System.out.println(name + " got updated history: " + message);
     }
-
 }
