@@ -1,3 +1,4 @@
+
 import java.io.IOException;
 
 /*
@@ -12,9 +13,10 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String args[]) throws IOException {
+
+        /*Create new ChatServer object and run serve method.*/
         ChatServer cs = new ChatServer();
-       
-        //ci.run();
+
         cs.serve();
 
     }

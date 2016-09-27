@@ -9,5 +9,7 @@
  * @author Otto
  */
 public interface ChatObserver {
+
+    /*update() method for ChatObserver interface*/
     public void update(ChatMessage message);
 }
