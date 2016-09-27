@@ -15,7 +15,7 @@ public class User implements ChatObserver {
     private String status;
     
     /*Constructor for User*/
-    public User(String name, String status) {
+    public User(String name) {
         this.name = name;
         this.status = status;
     }
