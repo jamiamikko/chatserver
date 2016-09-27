@@ -48,6 +48,7 @@ public class CommandInterpreter implements Runnable {
 
                         username = reader.nextLine();
                         System.out.print("Username is " + username + "\n>");
+                        newUser.changeUsername(username);
                     } else {
                         System.out.print("Username is " + username + "\n>");
                     }
@@ -77,7 +78,7 @@ public class CommandInterpreter implements Runnable {
                 /*Default case*/
                 default:
                     /*Check if username is defined. Set new username if username is not defined.
-                    Else print display new message, and add to chatHistory.*/
+                    Else instert message to chatHistory and notify users.*/
                     if (username.isEmpty()) {
                         System.out.println("Username not set.");
 
@@ -85,11 +86,12 @@ public class CommandInterpreter implements Runnable {
 
                         username = reader.nextLine();
                         System.out.print("Username is " + username + "\n>");
+                        newUser.changeUsername(username);
                     } else {
-                        System.out.print(username + ": " + command + "\n>");
+
                         ChatMessage chatmessage = new ChatMessage(username, command);
 
-                        getHistory.insert(chatmessage);
+                        chatHistory.insert(chatmessage);
 
                     }
             }

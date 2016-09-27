@@ -29,7 +29,7 @@ public class ChatHistory implements ObservableChat {
     /*insert() method for ChatHistory. Method adds message to chat history.*/
     public void insert(ChatMessage chatMessage) {
         messageList.add(chatMessage);
-
+        notifyObservers(chatMessage);
     }
 
     /*toString() method for chatHistory. Method adds time stamp to messages and
@@ -63,6 +63,8 @@ public class ChatHistory implements ObservableChat {
     /*notifyObservers() notify observers for changes*/
     @Override
     public void notifyObservers(ChatMessage message) {
-        System.out.println("History change: " + message);
+        for (ChatObserver observer : observers) {
+            observer.update(message);
+        }
     }
 }
