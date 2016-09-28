@@ -2,10 +2,15 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+/*
+This class is an instance that gets the messages from the CommandInterpreter and turns them into a String.
+
+@authors
+1402803 Jämiä Mikko
+1406733 Järvinen Otto
+1503524 Taba Tünde
+ */
 public class ChatHistory implements ObservableChat {
 
     /*Instance variables for ChatHistory*/
@@ -26,7 +31,7 @@ public class ChatHistory implements ObservableChat {
         return instance;
     }
 
-    /*insert() method for ChatHistory. Method adds message to chat history.*/
+    /*insert() method for ChatHistory. Method adds message to chat history and runs notifyObservers method.*/
     public void insert(ChatMessage chatMessage) {
         messageList.add(chatMessage);
         notifyObservers(chatMessage);

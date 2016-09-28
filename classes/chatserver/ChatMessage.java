@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+This is the message object class.
 
-/**
- *
- * @author jamiamikko
+@authors
+1402803 Jämiä Mikko
+1406733 Järvinen Otto
+1503524 Taba Tünde
  */
 public class ChatMessage {
 

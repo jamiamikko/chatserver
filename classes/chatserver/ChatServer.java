@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Class for creating a server that can be connected to through local host.
 
-/**
- *
- * @author jamiamikko
+@authors
+1402803 Jämiä Mikko
+1406733 Järvinen Otto
+1503524 Taba Tünde
  */
 import java.net.*;
 import java.io.*;
