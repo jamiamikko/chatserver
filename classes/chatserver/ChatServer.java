@@ -8,8 +8,11 @@ Class for creating a server that can be connected to through local host.
  */
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class ChatServer {
+
+    public ArrayList<ClientThread> clients = new ArrayList<>();
 
     /*Constructor for ChatServer*/
     ChatServer() {
@@ -25,22 +28,25 @@ public class ChatServer {
             ServerSocket server = new ServerSocket(0, 3);
             int portaddress = server.getLocalPort();
             System.out.println(portaddress);
-            Socket s;
+            Socket socket;
+
 
             /*While loop for waiting the server to accept the connection. When connection is established,
             start run the CommandInterpreter as a Thread.*/
             while (true) {
                 System.out.println("Waiting ....");
 
-                s = server.accept();
+                socket = server.accept();
 
-                System.out.println("Connection Established!!");
-                CommandInterpreter i = new CommandInterpreter(s.getInputStream(), new PrintStream(s.getOutputStream()));
+                System.out.println("New client accdepted");
+                //CommandInterpreter i = new CommandInterpreter(socket.getInputStream(), new PrintStream(socket.getOutputStream()));
 
-                Thread t = new Thread((Runnable) i);
-
-                t.start();
-
+                //Thread t = new Thread((Runnable) i);
+                ClientThread client = new ClientThread(socket);
+                Thread c = new Thread(client);
+                c.start();
+                clients.add(client);
+                // t.start();
             }
 
         } catch (IOException e) {

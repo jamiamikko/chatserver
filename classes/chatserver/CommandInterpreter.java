@@ -31,11 +31,11 @@ public class CommandInterpreter implements Runnable {
         ChatAddict newAddict = new ChatAddict("addict");
         chatHistory.register(newAddict);
 
-        Users userList = new Users();
+        //Users userList = new Users();
         Users getUsers = Users.getInstance();
 
         System.out.println("Hello!");
-        System.out.print("Commands:\n:user = Current username\n:history = Show sent messages\n:list = List current users:help = List commands\n:quit = Quit application\n");
+        System.out.print("Commands:\n:user = Current username\n:history = Show sent messages\n:list = List current users\n:help = List commands\n:quit = Quit application\n");
         System.out.print("Type a command: \n>");
 
         /*While loop for running the chat application*/
