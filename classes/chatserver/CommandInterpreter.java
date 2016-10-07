@@ -79,13 +79,17 @@ public class CommandInterpreter implements Runnable {
             case ":help":
                 processHelp();
                 break;
+                
+            case ":tableflip":
+                processTableflip(chatMessage);
+                break;
             default:
                 sendMessage(chatMessage);
                 history.insert(chatMessage);
                 break;
         }
     }
-
+    
     void processHistory() {
 
         getWriter().println(history.toString());
@@ -107,6 +111,17 @@ public class CommandInterpreter implements Runnable {
         String system = "System: ";
         getWriter().println(system + "Start by typing something.#Commands:#:history = show history#:userlist = list users#:help = help");
 
+    }
+    
+    void processTableflip(ChatMessage chatMessage) {
+        synchronized (clients) {
+            for (CommandInterpreter client : clients) {
+                System.out.println("Client loop:" + chatMessage.message);
+                
+                client.getWriter().println(chatMessage.username + ": (╯°□°）╯︵ ┻━┻");
+                
+            }
+        }
     }
 
     void sendMessage(ChatMessage chatMessage) {
