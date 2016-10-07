@@ -79,9 +79,13 @@ public class CommandInterpreter implements Runnable {
             case ":help":
                 processHelp();
                 break;
-                
+
             case ":tableflip":
                 processTableflip(chatMessage);
+                break;
+
+            case ":quit":
+                processQuit(chatMessage);
                 break;
             default:
                 sendMessage(chatMessage);
@@ -89,10 +93,25 @@ public class CommandInterpreter implements Runnable {
                 break;
         }
     }
-    
+
     void processHistory() {
 
         getWriter().println(history.toString());
+
+    }
+
+    void processQuit(ChatMessage chatMessage) {
+
+        synchronized (clients) {
+            for (CommandInterpreter client : clients) {
+                System.out.println("Client loop:" + chatMessage.username + " left");
+
+                client.getWriter().println("System: " + chatMessage.username + " left");
+                
+            }
+        }
+        
+        clients.remove(this);
 
     }
 
@@ -109,17 +128,17 @@ public class CommandInterpreter implements Runnable {
 
     void processHelp() {
         String system = "System: ";
-        getWriter().println(system + "Start by typing something.#Commands:#:history = show history#:userlist = list users#:help = help");
+        getWriter().println(system + "Start by typing something.#Commands:#:history = show history#:userlist = list users#:help = help#:tableflip = (╯°□°）╯︵ ┻━┻#:quit = leave chat");
 
     }
-    
+
     void processTableflip(ChatMessage chatMessage) {
         synchronized (clients) {
             for (CommandInterpreter client : clients) {
                 System.out.println("Client loop:" + chatMessage.message);
-                
+
                 client.getWriter().println(chatMessage.username + ": (╯°□°）╯︵ ┻━┻");
-                
+
             }
         }
     }
