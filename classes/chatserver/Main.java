@@ -6,9 +6,14 @@
 
 import java.io.IOException;
 
-/**
- *
- * @author RYU
+/*
+Main class for starting and creating chat server.
+
+@authors
+Group Tableflipz
+1402803 Jämiä Mikko
+1406733 Järvinen Otto
+1503524 Taba Tünde
  */
 public class Main {
 

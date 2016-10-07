@@ -7,6 +7,7 @@ import java.util.Calendar;
 This class is an instance that gets the messages from the CommandInterpreter and turns them into a String.
 
 @authors
+Group Tableflipz
 1402803 Jämiä Mikko
 1406733 Järvinen Otto
 1503524 Taba Tünde
@@ -19,7 +20,7 @@ public class ChatHistory {
 
 
     /*Constructor for ChatHistory*/
-    public ChatHistory() {
+    private ChatHistory() {
         this.messageList = new ArrayList<>();
     }
 
