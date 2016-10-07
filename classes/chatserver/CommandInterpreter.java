@@ -1,111 +1,124 @@
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
 
 /*
-This is the class for reacting to user's commands and saving the users and messages.
-
-@authors:
-1402803 Jämiä Mikko
-1406733 Järvinen Otto
-1503524 Taba Tünde
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author RYU
  */
 public class CommandInterpreter implements Runnable {
 
-    /*Create new scanner object*/
-    Scanner reader = new Scanner(System.in);
+    String username;
+    Socket socket;
+    BufferedReader in;
+    PrintWriter out;
+    static ArrayList<CommandInterpreter> clients = new ArrayList<CommandInterpreter>();
+    ChatHistory history = ChatHistory.getInstance();
 
-    /*Constructor for CommandInterpreter*/
-    public CommandInterpreter(InputStream inputStream, PrintStream outputStream) {
+    public CommandInterpreter(Socket socket) {
+        this.socket = socket;
     }
 
-    /*run() method for CommandInterpreter*/
+    @Override
     public void run() {
+        /*while socket is open:
+        - read client's command
+        - process command
+         */
 
-        /*Instance variables and objects needed in run() method*/
-        String username = "";
-        ChatHistory chatHistory = new ChatHistory();
-        ChatHistory getHistory = ChatHistory.getInstance();
+        synchronized (clients) {
+            clients.add(this);
+        }
 
-        ChatAddict newAddict = new ChatAddict("addict");
-        chatHistory.register(newAddict);
-
-        //Users userList = new Users();
-        Users getUsers = Users.getInstance();
-
-        System.out.println("Hello!");
-        System.out.print("Commands:\n:user = Current username\n:history = Show sent messages\n:list = List current users\n:help = List commands\n:quit = Quit application\n");
-        System.out.print("Type a command: \n>");
-
-        /*While loop for running the chat application*/
-        while (true) {
-
-            /*Read the next command*/
-            String command = reader.nextLine();
-
-            /*Switch case for commands*/
-            switch (command) {
-                
-                /*Case for command :user*/
-                case ":user":
-                    
-                    /*Show current username*/
-                    System.out.println("Your current username is "+username);
+        try {
+            out = new PrintWriter(socket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            System.out.println("ClientThread started");
+            while (!socket.isClosed()) {
+                String input = in.readLine();
+                System.out.println(input);
+                if (input == null) {
                     break;
-                    
-                /*Case for command :quit*/
-                case ":quit":
+                }
+                ChatMessage chatMessage = new ChatMessage(input);
+                processMessage(chatMessage);
 
-                    /*Quit application*/
-                    System.out.println("Goodbye.");
-                    System.exit(0);
-                    break;
-                    
-                /*Case for command :history*/
-                case ":history":
-
-                    /*Print history*/
-                    System.out.print(getHistory.toString() + ">");
-                    break;
-
-                /*Case for command :help*/
-                case ":help":
-
-                    /*List all commands*/
-                    System.out.print("Commands:\n:user = Show username\n:name = Change username\n:history = Show message history\n:list = Show registered users\n:help = List commands\n:quit = Quit application\n>");
-                    break;
-
-                /*Case for command :userlist*/
-                case ":list":
-
-                    System.out.print(getUsers.toString() + ">");
-                    break;
-
-                /*Default case*/
-                default:
-                    /*Check if username is defined. Set new username if username is not defined.
-                    Else add message to chatHistory.*/
-                    if (username.isEmpty()) {
-                        System.out.println("Username not set.");
-
-                        System.out.print("Type your username: \n>");
-
-                        username = reader.nextLine();
-
-                        getUsers.insert(username);
-                        newAddict.changeName(username);
-
-                        System.out.print("Username is " + username + "\n>");
-                    } else {
-
-                        ChatMessage chatmessage = new ChatMessage(username, command);
-
-                        chatHistory.insert(chatmessage);
-
-                    }
             }
+        } catch (IOException e) {
+            System.out.println("Error");
+        }
 
+        synchronized (clients) {
+            clients.remove(this);
+        }
+    }
+
+    public PrintWriter getWriter() {
+        return out;
+    }
+
+    void processMessage(ChatMessage chatMessage) {
+        System.out.println("Message gotten:" + chatMessage.message);
+        username = chatMessage.username;
+        switch (chatMessage.message) {
+            case ":history":
+                processHistory();
+                break;
+            case ":userlist":
+                processUserlist();
+                break;
+            case ":help":
+                processHelp();
+                break;
+            default:
+                sendMessage(chatMessage);
+                history.insert(chatMessage);
+                break;
+        }
+    }
+
+    void processHistory() {
+
+        getWriter().println(history.toString());
+
+    }
+
+    void processUserlist() {
+        String list = "System: Users:#";
+        synchronized (clients) {
+            for (CommandInterpreter client : clients) {
+                list = list + client.username + " ";
+            }
+        }
+        getWriter().println(list);
+        System.out.println("Userlist: " + list + "<<<");
+    }
+
+    void processHelp() {
+        String system = "System: ";
+        getWriter().println(system + "Start by typing something.#Commands:#:history = show history#:userlist = list users#:help = help");
+
+    }
+
+    void sendMessage(ChatMessage chatMessage) {
+        synchronized (clients) {
+            for (CommandInterpreter client : clients) {
+                System.out.println("Client loop:" + chatMessage.message);
+                //if (!username.equals(chatMessage.username)) {
+                client.getWriter().println(chatMessage.username + ": " + chatMessage.message);
+                /*}else{
+                client.getWriter().println(chatMessage.message);
+            }*/
+            }
         }
 
     }

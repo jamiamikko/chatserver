@@ -18,10 +18,16 @@ public class ChatMessage {
         this.message = message;
     }
 
+    ChatMessage(String input) {
+        int idx = input.indexOf(':'); //TODO error handling
+        username = input.substring(0, idx);
+        message = input.substring(idx + 2);
+    }
+
     /*toString() method, returns the message*/
     @Override
     public String toString() {
-        return this.message;
+        return username + ": " + message;
     }
 
 }

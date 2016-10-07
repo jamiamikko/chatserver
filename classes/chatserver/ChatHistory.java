@@ -11,17 +11,15 @@ This class is an instance that gets the messages from the CommandInterpreter and
 1406733 Järvinen Otto
 1503524 Taba Tünde
  */
-public class ChatHistory implements ObservableChat {
+public class ChatHistory {
 
     /*Instance variables for ChatHistory*/
-    private ArrayList<ChatObserver> observers;
     static ArrayList<ChatMessage> messageList;
     private static ChatHistory instance = new ChatHistory();
 
 
     /*Constructor for ChatHistory*/
     public ChatHistory() {
-        this.observers = new ArrayList<>();
         this.messageList = new ArrayList<>();
     }
 
@@ -32,44 +30,21 @@ public class ChatHistory implements ObservableChat {
     }
 
     /*insert() method for ChatHistory. Method adds message to chat history and runs notifyObservers method.*/
-    public void insert(ChatMessage chatMessage) {
+    synchronized public void insert(ChatMessage chatMessage) {
         messageList.add(chatMessage);
-        notifyObservers(chatMessage);
     }
 
     /*toString() method for chatHistory. Method adds time stamp to messages and
     return chatHistory as a string*/
     @Override
-    public String toString() {
-        String list = new String();
+    synchronized public String toString() {
+        String list = "System: History: #";
 
-        for (ChatMessage element : messageList) {
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        for (int i = 0; i < messageList.size(); i++) {
 
-            list += (timeStamp + " " + element.username + ": " + element.message + "\n");
+            list += ("[OLD]" + messageList.get(i).username + ": " + messageList.get(i).message + "#");
         }
-
+        System.out.println("list:" + list);
         return list;
-    }
-
-    /*register() method for adding new observers*/
-    @Override
-    public void register(ChatObserver observer) {
-        observers.add(observer);
-
-    }
-
-    /*deregister() method for removing observers*/
-    @Override
-    public void deregister(ChatObserver observer) {
-        observers.remove(observer);
-    }
-
-    /*notifyObservers() notify observers for changes*/
-    @Override
-    public void notifyObservers(ChatMessage message) {
-        for (ChatObserver observer : observers) {
-            observer.update(message);
-        }
     }
 }
