@@ -1,7 +1,5 @@
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /*
 This class is an instance that gets the messages from the CommandInterpreter and turns them into a String.
@@ -15,7 +13,7 @@ Group Tableflipz
 public class ChatHistory {
 
     /*Instance variables for ChatHistory*/
-    static ArrayList<ChatMessage> messageList;
+    ArrayList<ChatMessage> messageList;
     private static ChatHistory instance = new ChatHistory();
 
 
@@ -24,19 +22,17 @@ public class ChatHistory {
         this.messageList = new ArrayList<>();
     }
 
-    /*getInstance() method for ChatHistory. Method returns the instance,
-    for printing the chat history*/
+    /*Returns the instance.*/
     public static ChatHistory getInstance() {
         return instance;
     }
 
-    /*insert() method for ChatHistory. Method adds message to chat history and runs notifyObservers method.*/
+    /*insert() method for ChatHistory. Method adds message to chat history.*/
     synchronized public void insert(ChatMessage chatMessage) {
         messageList.add(chatMessage);
     }
 
-    /*toString() method for chatHistory. Method adds time stamp to messages and
-    return chatHistory as a string*/
+    /*toString() method for chatHistory. Returns messageList as a string*/
     @Override
     synchronized public String toString() {
         String list = "System: History: #";

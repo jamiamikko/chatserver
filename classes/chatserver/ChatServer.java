@@ -37,7 +37,7 @@ public class ChatServer {
 
                 socket = server.accept();
 
-                System.out.println("New client accdepted");
+                System.out.println("New client accepted");
 
                 CommandInterpreter client = new CommandInterpreter(socket);
                 Thread c = new Thread(client);

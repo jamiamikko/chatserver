@@ -128,9 +128,9 @@ public class CommandInterpreter implements Runnable {
 
         synchronized (clients) {
             for (CommandInterpreter client : clients) {
-                System.out.println("Client loop:" + chatMessage.username + " left");
+                System.out.println("Client loop:" + chatMessage.username + " has left the chat.");
 
-                client.getWriter().println("System: " + chatMessage.username + " left");
+                client.getWriter().println("System: " + chatMessage.username + " has left the chat.");
 
             }
         }
