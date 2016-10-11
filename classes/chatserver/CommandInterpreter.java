@@ -130,7 +130,7 @@ public class CommandInterpreter implements Runnable {
             for (CommandInterpreter client : clients) {
                 System.out.println("Client loop:" + chatMessage.username + " has left the chat.");
 
-                client.getWriter().println("System: " + chatMessage.username + " has left the chat.");
+                client.getWriter().println("[]System: " + chatMessage.username + " has left the chat.");
 
             }
         }
@@ -141,7 +141,7 @@ public class CommandInterpreter implements Runnable {
 
     /*processUserlist() method for printing user list*/
     void processUserlist() {
-        String list = "System: Users:#";
+        String list = "[]System: Users:#";
         synchronized (clients) {
             for (CommandInterpreter client : clients) {
                 list = list + client.username + " ";
@@ -153,7 +153,7 @@ public class CommandInterpreter implements Runnable {
 
     /*processHelp() method for printing help message*/
     void processHelp() {
-        String system = "System: ";
+        String system = "[]System: ";
         getWriter().println(system + "Start by typing something.#Commands:#:history = show history#:userlist = list users#:help = help#:tableflip = (╯°□°）╯︵ ┻━┻#:quit = leave chat");
 
     }
@@ -164,7 +164,7 @@ public class CommandInterpreter implements Runnable {
             for (CommandInterpreter client : clients) {
                 System.out.println("Client loop:" + chatMessage.message);
 
-                client.getWriter().println(chatMessage.username + ": (╯°□°）╯︵ ┻━┻");
+                client.getWriter().println(chatMessage.timeStamp + chatMessage.username + ": (╯°□°）╯︵ ┻━┻");
 
             }
         }
@@ -176,7 +176,7 @@ public class CommandInterpreter implements Runnable {
             for (CommandInterpreter client : clients) {
                 System.out.println("Client loop:" + chatMessage.message);
 
-                client.getWriter().println(chatMessage.username + ": " + chatMessage.message);
+                client.getWriter().println(chatMessage.timeStamp + chatMessage.username + ": " + chatMessage.message);
 
             }
         }

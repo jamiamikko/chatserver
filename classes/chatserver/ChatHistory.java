@@ -35,11 +35,11 @@ public class ChatHistory {
     /*toString() method for chatHistory. Returns messageList as a string*/
     @Override
     synchronized public String toString() {
-        String list = "System: History: #";
+        String list = "[]System: History: #";
 
         for (int i = 0; i < messageList.size(); i++) {
 
-            list += ("[OLD]" + messageList.get(i).username + ": " + messageList.get(i).message + "#");
+            list += (messageList.get(i).timeStamp + messageList.get(i).username + ": " + messageList.get(i).message + "#");
         }
         System.out.println("list:" + list);
         return list;
