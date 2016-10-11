@@ -16,15 +16,11 @@ public class ChatMessage {
     
     /*Constructor for ChatMessage, accepts input as a parameter. Parses the input to two variables username and message*/
     ChatMessage(String input) {
-        System.out.println("I'm here I: " + input);
         int idx = input.indexOf(']');
-        System.out.println("index1 = " + idx);
         int idx2 = input.indexOf(':'); //TODO error handling
-        System.out.println("index2 = " + idx2);
         timeStamp = input.substring(0, idx+1);
         username = input.substring(idx+1, idx2);
         message = input.substring(idx2 + 2);
-        System.out.println("I'm here II: " + timeStamp + "_" + username + "_" + message);
     }
 
     /*toString() method, returns the message*/

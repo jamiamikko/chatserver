@@ -53,7 +53,6 @@ public class CommandInterpreter implements Runnable {
             /*While socket has a connecition, we process new messages*/
             while (!socket.isClosed()) {
                 String input = in.readLine();
-                System.out.println(input);
                 if (input == null) {
                     break;
                 }
